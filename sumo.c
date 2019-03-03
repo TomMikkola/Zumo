@@ -70,7 +70,7 @@ void zmain(void)
         }
     }   
     
-    for(;;) // odota kaukos‰‰dint‰ + start + ajanotto
+    for(;;) // odota kaukos√§√§dint√§ + start + ajanotto
     {
         start_aika = xTaskGetTickCount(); // hae aloitusaika
         print_mqtt("Zumo002/ready", "zumo");      
@@ -79,8 +79,8 @@ void zmain(void)
         break; 
     }   
          
-    // **** PƒƒOHJELMA **** //
-    motor_turn(55,25,100); // pieni alkukiihdytys, ettei lue tˆrm‰ykseksi
+    // **** P√Ñ√ÑOHJELMA **** //
+    motor_turn(55,25,100); // pieni alkukiihdytys, ettei lue t√∂rm√§ykseksi
     motor_turn(155,125,1150); // aja keskelle
         
     for(;;)
@@ -96,12 +96,12 @@ void zmain(void)
                 reflectance_digital(&dig);
                 lue_osuma();
                                                                 
-                if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1) //jos ulkokeh‰ tulee vastaan tai keula nousee ilmaan
+                if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1) //jos ulkokeh√§ tulee vastaan tai keula nousee ilmaan
                 {
                     motor_forward(0,0);
                     vTaskDelay(100);
                     
-                    reflectance_digital(&dig); //tupla checkkaus pelk‰n "keulahypyn" varalta 
+                    reflectance_digital(&dig); //tupla checkkaus pelk√§n "keulahypyn" varalta 
                     
                     if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1)
                     {
@@ -109,7 +109,7 @@ void zmain(void)
                         motor_backward(50,50); // pieni alkukiihdytys, ettei lue osumaksi
                         motor_backward(150,450);
                         
-                        for(int i = 0; i < 60; i++) //k‰‰nnˆs
+                        for(int i = 0; i < 60; i++) //k√§√§nn√∂s
                         {
                             motor_forward(0,0);
                             motor_turn(255,0,5);
@@ -128,19 +128,19 @@ void zmain(void)
         }
         
         reflectance_digital(&dig);
-        if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1) //jos ulkokeh‰ tulee vastaan tai keula nousee ilmaan
+        if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1) //jos ulkokeh√§ tulee vastaan tai keula nousee ilmaan
         {
-            motor_forward(0,0); // pys‰hdy + odota
+            motor_forward(0,0); // pys√§hdy + odota
             vTaskDelay(100);
                     
-            reflectance_digital(&dig); //tupla checkkaus pelk‰n "keulahypyn" varalta               
+            reflectance_digital(&dig); //tupla checkkaus pelk√§n "keulahypyn" varalta               
             if(dig.l3 == 1 || dig.l2 == 1 || dig.l1 == 1 || dig.r1 == 1 || dig.r2 == 1 || dig.r3 == 1)
             {
                 motor_backward(0,0);
                 motor_backward(50,50); // pieni alkukiihdytys ettei lue osumaksi
                 motor_backward(150,450);
                 
-                for(int i = 0; i < 60; i++) //k‰‰nnˆs
+                for(int i = 0; i < 60; i++) //k√§√§nn√∂s
                 {
                     motor_forward(0,0);
                     motor_turn(255,0,5);
@@ -163,7 +163,7 @@ void zmain(void)
     }
 }   
 
-void tornado() //pyˆri paikallaan
+void tornado() //py√∂ri paikallaan
 {
     motor_turn(255,0,10);
     motor_backward(0,0);
@@ -185,7 +185,7 @@ double laskekulma(double x,double y) //laske osumakulma
     return kulma;
 }
 
-void lue_osuma() //m‰‰ritt‰‰ raja-arvot kiihtyvyysanturille ja tulostaa osumakulman
+void lue_osuma() //m√§√§ritt√§√§ raja-arvot kiihtyvyysanturille ja tulostaa osumakulman
 {
     struct accData_ data;
     
@@ -196,7 +196,7 @@ void lue_osuma() //m‰‰ritt‰‰ raja-arvot kiihtyvyysanturille ja tulostaa osumakul
     double kulma;
     u_int32_t osuma_aika;
     
-    if(data.accX < -10800) //osuma edest‰
+    if(data.accX < -10800) //osuma edest√§
     {
         printf("%.2f %.2f\n",x, y);
         kulma = laskekulma(x, y);
