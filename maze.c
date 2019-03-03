@@ -38,7 +38,7 @@ void zmain(void)
     Ultra_Start();
     int d; 
     
-    int k; //k‰‰ntymissuunnan muuttuja 0=vasemmalle 1=oikealle
+    int k; //k√§√§ntymissuunnan muuttuja 0=vasemmalle 1=oikealle
     int koord_x, koord_y;
     int suunta = 1; //0=taakse, 1=eteen, 2=vasemmalle, 3=oikealle
     
@@ -72,7 +72,7 @@ void zmain(void)
         }
     }   
     
-    for(;;) // odota kaukos‰‰dint‰ + start + ajanotto
+    for(;;) // odota kaukos√§√§dint√§ + start + ajanotto
     {
         start_aika = xTaskGetTickCount(); // luo aloitusaika
         print_mqtt("Zumo002/ready", "maze");      
@@ -83,7 +83,7 @@ void zmain(void)
         break;
     }   
 
-    // ********************** PƒƒOHJELMA ********************** //
+    // ********************** P√Ñ√ÑOHJELMA ********************** //
     while(1) 
     {
         reflectance_digital(&dig);
@@ -91,7 +91,7 @@ void zmain(void)
         
         if(dig.l3 == 1 && dig.l2 == 1 && dig.r2 == 1 && dig.r3 == 1) //risteys
         {              
-            // koordinaattien p‰ivitys
+            // koordinaattien p√§ivitys
             if(suunta == 0) // jos suunta taakse
             {
                 koord_y--;
@@ -114,18 +114,18 @@ void zmain(void)
           
             print_mqtt("Zumo002/position","%d %d", koord_x, koord_y);
             
-            ajayli(); // ylit‰ risteys
+            ajayli(); // ylit√§ risteys
             
             d = Ultra_GetDistance();
             vTaskDelay(100);
             d = Ultra_GetDistance(); //tuplacheckkaus lukuvirheen varalta
                      
-            if(d < 20 && koord_x == 0) // jos este edess‰ ja keskikaistalla
+            if(d < 20 && koord_x == 0) // jos este edess√§ ja keskikaistalla
             {
-                k = 0; //k‰‰nny vasemmalle
+                k = 0; //k√§√§nny vasemmalle
                 kaanto90(k, &suunta);
                     
-                for(;;) // aja yksi ruutu eteenp‰in
+                for(;;) // aja yksi ruutu eteenp√§in
                 {
                     motor_forward(100,5);
                     pysyviivalla();
@@ -133,7 +133,7 @@ void zmain(void)
                                                
                     if(dig.l3 == 1 && dig.l2 == 1 && dig.r2 == 1 && dig.r3 == 1) // risteys
                     {   
-                        // koordinaattien p‰ivitys
+                        // koordinaattien p√§ivitys
                         if(suunta == 0) // jos suunta taakse
                         {
                             koord_y--;
@@ -156,18 +156,18 @@ void zmain(void)
           
                         print_mqtt("Zumo002/position","%d %d", koord_x, koord_y);                         
                             
-                        ajayli(); //ylit‰ risteys
+                        ajayli(); //ylit√§ risteys
                             
-                        k = 1; //k‰‰nny oikealle
+                        k = 1; //k√§√§nny oikealle
                         kaanto90(k, &suunta);
                         
                         d = Ultra_GetDistance();
                         vTaskDelay(100);
                         d = Ultra_GetDistance(); //tuplacheckkaus lukuvirheen varalta
                             
-                        if(d < 20) //jos este edess‰
+                        if(d < 20) //jos este edess√§
                         {
-                            k = 0; //k‰‰nny vasemmalle
+                            k = 0; //k√§√§nny vasemmalle
                             kaanto90(k, &suunta);
                         }
                             
@@ -176,18 +176,18 @@ void zmain(void)
                 }
             }
             
-            d = Ultra_GetDistance(); //p‰ivit‰ v‰liss‰ ettei tule "haamuestett‰" + tuplachechkaus lukuvirheen varalta
+            d = Ultra_GetDistance(); //p√§ivit√§ v√§liss√§ ettei tule "haamuestett√§" + tuplachechkaus lukuvirheen varalta
             vTaskDelay(100);
             d = Ultra_GetDistance();
             
-            if(d < 20 && koord_x != 0) // jos edess‰ on este ja robotti mazen sivulla
+            if(d < 20 && koord_x != 0) // jos edess√§ on este ja robotti mazen sivulla
             {                
                 if(koord_x < 0) //jos vasemmalla puolella mazea
                 {
-                    k = 1; // k‰‰nny oikealle
+                    k = 1; // k√§√§nny oikealle
                     kaanto90(k, &suunta);
                     
-                    for(;;) // aja yksi ruutu eteenp‰in
+                    for(;;) // aja yksi ruutu eteenp√§in
                     {
                         motor_forward(100,5);
                         pysyviivalla();
@@ -195,7 +195,7 @@ void zmain(void)
                                                
                         if(dig.l3 == 1 && dig.l2 == 1 && dig.r2 == 1 && dig.r3 == 1) //risteys
                         {
-                            // koordinaattien p‰ivitys
+                            // koordinaattien p√§ivitys
                             if(suunta == 0) // jos suunta taakse
                             {
                                 koord_y--;
@@ -220,16 +220,16 @@ void zmain(void)
                             
                             ajayli(); // aja risteyksen yli
                             
-                            k = 0; //k‰‰nny vasemmalle
+                            k = 0; //k√§√§nny vasemmalle
                             kaanto90(k, &suunta);
                             
                             d = Ultra_GetDistance();
                             vTaskDelay(100);
                             d = Ultra_GetDistance(); //tuplacheckkaus virheiden varalta
                             
-                            if(d < 20) //jos edess‰ este
+                            if(d < 20) //jos edess√§ este
                             {
-                                k = 1; //k‰‰nny oikealle
+                                k = 1; //k√§√§nny oikealle
                                 kaanto90(k, &suunta);
                             }
                             
@@ -240,10 +240,10 @@ void zmain(void)
                 
                 if(koord_x > 0) // jos oikealla puolella mazea
                 {
-                    k = 0; //k‰‰nny vasemmalle
+                    k = 0; //k√§√§nny vasemmalle
                     kaanto90(k, &suunta);
                     
-                    for(;;) // aja yksi ruutu eteenp‰in
+                    for(;;) // aja yksi ruutu eteenp√§in
                     {
                         motor_forward(100,5);
                         pysyviivalla();
@@ -251,7 +251,7 @@ void zmain(void)
                                                
                         if(dig.l3 == 1 && dig.l2 == 1 && dig.r2 == 1 && dig.r3 == 1) //risteys
                         { 
-                            // koordinaattien p‰ivitys
+                            // koordinaattien p√§ivitys
                             if(suunta == 0) // jos suunta taakse
                             {
                                 koord_y--;
@@ -277,15 +277,15 @@ void zmain(void)
                             ajayli(); // aja risteyksen yli
                             
                             k = 1;
-                            kaanto90(k, &suunta); //k‰‰nny oikealle + tarkasta    
+                            kaanto90(k, &suunta); //k√§√§nny oikealle + tarkasta    
                             
                             d = Ultra_GetDistance();
                             vTaskDelay(100);
                             d = Ultra_GetDistance(); //tuplacheckkaus lukuvirheiden varalta
                             
-                            if(d < 20) // jos edess‰ on este
+                            if(d < 20) // jos edess√§ on este
                             {
-                                k = 0; //k‰‰nny vasemmalle
+                                k = 0; //k√§√§nny vasemmalle
                                 kaanto90(k, &suunta);
                             }
                             
@@ -300,71 +300,71 @@ void zmain(void)
                 if(suunta == 2) //suunta vasemmalle
                 {
                     k = 1;
-                    kaanto90(k, &suunta); //k‰‰ntˆ oikealle
+                    kaanto90(k, &suunta); //k√§√§nt√∂ oikealle
                     
                     d = Ultra_GetDistance();
                     vTaskDelay(100);
                     d = Ultra_GetDistance(); //tuplacheckaus
                     
-                    if(d < 20) //jos este edess‰
+                    if(d < 20) //jos este edess√§
                     {
                         k = 0;
-                        kaanto90(k, &suunta); // k‰‰ntˆ takaisin vasemmalle
+                        kaanto90(k, &suunta); // k√§√§nt√∂ takaisin vasemmalle
                     }
                 }
                 
                 if(suunta == 3) //suunta oikealle
                 {
                     k = 0;
-                    kaanto90(k, &suunta); //k‰‰ntˆ vasemmalle
+                    kaanto90(k, &suunta); //k√§√§nt√∂ vasemmalle
                     
                     d = Ultra_GetDistance();
                     vTaskDelay(100);
                     d = Ultra_GetDistance(); //tuplacheckaus
                     
-                    if(d < 20) //jos este edess‰
+                    if(d < 20) //jos este edess√§
                     {
                         k = 1;
-                        kaanto90(k, &suunta); // k‰‰ntˆ takaisin oikealle
+                        kaanto90(k, &suunta); // k√§√§nt√∂ takaisin oikealle
                     }
                 }
             }
             
             if(koord_x == -2 && suunta == 2) //jos laidassa ja suunta vasemmalle
             {
-                k = 1; //k‰‰nny oikealle
+                k = 1; //k√§√§nny oikealle
                 kaanto90(k, &suunta);
             }
             
             if(koord_x == 2 && suunta == 3) //jos laidassa ja suunta oikealle
             {
-                k = 0; //k‰‰nny vasemmalle
+                k = 0; //k√§√§nny vasemmalle
                 kaanto90(k, &suunta);
             }
             
-            if(koord_y == 11 && koord_x < 0 && suunta == 1) //jos loppup‰‰dyss‰ vasemmalla puolella
+            if(koord_y == 11 && koord_x < 0 && suunta == 1) //jos loppup√§√§dyss√§ vasemmalla puolella
             {
-                k = 1; //k‰‰nny oikealle
+                k = 1; //k√§√§nny oikealle
                 kaanto90(k, &suunta);
             }
             
-            if(koord_y == 11 && koord_x > 0 && suunta == 1) //jos loppup‰‰dyss‰ oikealla puolella
+            if(koord_y == 11 && koord_x > 0 && suunta == 1) //jos loppup√§√§dyss√§ oikealla puolella
             {
-                k = 0; //k‰‰nny vasemmalle
+                k = 0; //k√§√§nny vasemmalle
                 kaanto90(k, &suunta);
             }
             
-            if(koord_y == 11 && koord_x == 0) // k‰‰nny loppusuoralle
+            if(koord_y == 11 && koord_x == 0) // k√§√§nny loppusuoralle
             {
                 if(suunta == 2) //jos suunta vasemmalle
                 {
-                    k = 1; //k‰‰nny oikealle
+                    k = 1; //k√§√§nny oikealle
                     kaanto90(k, &suunta);
                 }
                 
                 if(suunta == 3) //jos suunta oikealle
                 {
-                    k = 0; //k‰‰nny vasemmalle
+                    k = 0; //k√§√§nny vasemmalle
                     kaanto90(k, &suunta);
                 }
             }
@@ -387,7 +387,7 @@ void zmain(void)
 // **************** FUNKTIOT **************** //
 void ajayli()
 {
-    motor_forward(0,0); //pys‰yt‰ + aja viivan yli
+    motor_forward(0,0); //pys√§yt√§ + aja viivan yli
     motor_forward(100,75);
 }
 
@@ -397,9 +397,9 @@ void kaanto90(int k, int *suunta)
     reflectance_start();
     reflectance_set_threshold(9000, 9000, 11000, 11000, 9000, 9000);
     
-    if(k == 1) //k‰‰nnˆs oikealle
+    if(k == 1) //k√§√§nn√∂s oikealle
     {
-        switch(*suunta) //suunta p‰‰ohjelmasta
+        switch(*suunta) //suunta p√§√§ohjelmasta
         {   
             case 0:
             {
@@ -426,7 +426,7 @@ void kaanto90(int k, int *suunta)
             }
         }
         
-        for(int i = 0; i < 42; i++) //90 k‰‰nnˆs
+        for(int i = 0; i < 42; i++) //90 k√§√§nn√∂s
         {
             motor_turn(255,0,5);
             motor_backward(0,0);
@@ -446,7 +446,7 @@ void kaanto90(int k, int *suunta)
                 motor_forward(0,0);
             }
             
-            if(dig.r3 == 1 || dig.r2 == 1) //jos j‰‰ vajaaksi
+            if(dig.r3 == 1 || dig.r2 == 1) //jos j√§√§ vajaaksi
             {
                 motor_turn(255,0,5);
                 motor_backward(0,0);
@@ -459,13 +459,13 @@ void kaanto90(int k, int *suunta)
                 break;
             }      
             
-            motor_forward(50,5); // est‰‰ robotin j‰‰tymisen jos ehdot ei t‰yty
+            motor_forward(50,5); // est√§√§ robotin j√§√§tymisen jos ehdot ei t√§yty
         }
     }
     
-    if(k == 0) // k‰‰nnˆs vasemmalle
+    if(k == 0) // k√§√§nn√∂s vasemmalle
     {
-        switch(*suunta) //suunta p‰‰ohjelmasta
+        switch(*suunta) //suunta p√§√§ohjelmasta
         {
             case 0:
             {
@@ -492,7 +492,7 @@ void kaanto90(int k, int *suunta)
             }
         }
         
-        for(int i = 0; i < 42; i++) // 90 k‰‰nnˆs
+        for(int i = 0; i < 42; i++) // 90 k√§√§nn√∂s
         {
             motor_turn(0,255,5);
             motor_backward(0,0);
@@ -512,7 +512,7 @@ void kaanto90(int k, int *suunta)
                 motor_forward(0,0);
             }
             
-            if(dig.l3 == 1 || dig.l2 == 1) //jos j‰i vajaaksi
+            if(dig.l3 == 1 || dig.l2 == 1) //jos j√§i vajaaksi
             {
                 motor_turn(0,255,5);
                 motor_backward(0,0);
@@ -525,7 +525,7 @@ void kaanto90(int k, int *suunta)
                 break;
             }       
             
-            motor_forward(50,5); // est‰‰ robotin j‰‰tymisen jos ehdot ei t‰yty
+            motor_forward(50,5); // est√§√§ robotin j√§√§tymisen jos ehdot ei t√§yty
         }
     }
 }
